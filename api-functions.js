@@ -1,11 +1,11 @@
 const db = require('./db.js'); 
 
-exports.today = async function () {
+exports.date = async function (currentDate) {
   const collection = db.get();
-  let today = new Date();
+  let today = new Date(currentDate);
   today.setHours(0,0,0,0);
   const td = today.getTime();
-  let tomorrow = new Date();
+  let tomorrow = new Date(currentDate);
   tomorrow.setDate(today.getDate() + 1)
   tomorrow.setHours(0,0,0,0);
   const tm = tomorrow.getTime();

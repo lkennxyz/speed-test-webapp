@@ -14,6 +14,7 @@ const schema = buildSchema(`
   type Query {
     hello: String,
     getToday: [Result],
+    getDate(date: String): [Result],
   }
 `);
 
@@ -23,9 +24,13 @@ const root = {
     return 'Hello world!';
   },
   getToday: async () => {
-    const results = await api.today();
+    const results = await api.date(new Date());
     return results;
   },
+  getDate: async ({ date }) => {
+    const results = await api.date(date);
+    return results;
+  }
 };
 
 (async () => { 
