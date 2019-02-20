@@ -1,0 +1,16 @@
+{
+  "name": "speed-test-webapp",
+  "version": "1.0.0",
+  "description": "React app and express/graphql server to display data from mongo made by speed-test-process",
+  "main": "server.js",
+  "author": "Liam Kennedy <liam@lkenn.xyz>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1"
+  },
+  "devDependencies": {
+    "dotenv": "^6.2.0"
+  }
+}
