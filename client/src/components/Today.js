@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Helmet from 'react-helmet';
 import LineGraph from './LineGraph';
 import Head from './Head';
 import Content from './Content';
@@ -17,6 +18,7 @@ class Today extends Component {
     const graph = (this.state.data) ? <LineGraph data={this.state.data}/> : 'No Data';
     return (
       <div className="Today">
+        <Helmet>Today's Speeds</Helmet>
         <Head />
         <Content>
           {graph}

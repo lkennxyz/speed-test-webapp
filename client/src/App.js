@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
+import Helmet from 'react-helmet';
 // import logo from './logo.svg';
 import Side from './components/Side';
 import Today from './components/Today';
@@ -24,6 +25,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <AppContainer>
+            <Helmet>Speed Test</Helmet>
             <Side />
             <Body>
               <Route path="/today" component={Today} />

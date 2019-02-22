@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
+import Helmet from 'react-helmet';
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import LineGraph from './LineGraph';
 import Head from './Head';
@@ -18,6 +19,7 @@ class Side extends Component {
     const graph = (this.state.data) ? <LineGraph data={this.state.data}/> : 'No Data';
     return (
       <div className='Date'>
+        <Helmet>Speeds for {this.state.selectedDate}</Helmet>
         <Head>
           <DatePicker
             selected={this.state.selectedDate}
