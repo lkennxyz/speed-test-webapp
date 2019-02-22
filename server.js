@@ -1,7 +1,7 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
-const db = require('./db'); 
+const db = require('./db');
 const api = require('./api-functions');
 
 
@@ -33,13 +33,14 @@ const root = {
   }
 };
 
-(async () => { 
+(async () => {
   const app = express();
   app.use('/graphql', graphqlHTTP({
     schema: schema,
     rootValue: root,
     graphiql: true,
   }));
+  app.use('/', express.static('client/build'));
   app.listen(4000, async () => {
     console.log('Running a GraphQL API server at localhost:4000/graphql');
     await db.connect();
