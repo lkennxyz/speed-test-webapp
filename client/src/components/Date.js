@@ -19,7 +19,7 @@ class Side extends Component {
     const graph = (this.state.data) ? <LineGraph data={this.state.data}/> : 'No Data';
     return (
       <div className='Date'>
-        <Helmet>Speeds for {this.state.selectedDate}</Helmet>
+        <Helmet><title>Speeds for {this.state.selectedDate}</title></Helmet>
         <Head>
           <DatePicker
             selected={this.state.selectedDate}
