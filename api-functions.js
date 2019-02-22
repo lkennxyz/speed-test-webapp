@@ -1,4 +1,4 @@
-const db = require('./db.js'); 
+const db = require('./db.js');
 
 exports.date = async function (currentDate) {
   const collection = db.get();
@@ -17,6 +17,7 @@ exports.date = async function (currentDate) {
       ]
     })
     .project({ "mbps": 1, "time": 1, _id: 0})
+    .sort({ "time": 1 })
     .toArray();
   return results;
 };
