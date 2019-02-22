@@ -1,7 +1,6 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
-require('dotenv').config();
 const path = require('path');
 const db = require('./db');
 const api = require('./api-functions');
