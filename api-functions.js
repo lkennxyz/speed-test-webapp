@@ -21,3 +21,23 @@ exports.date = async function (currentDate) {
     .toArray();
   return results;
 };
+
+exports.avgAll = async function () {
+  const collection = db.get();
+  if(collection) {
+    const avgs = await collection.aggregate(
+      [
+        { $group:
+          {
+            _id:"$hour",
+            mbps: { $avg: "$mbps"},
+          }
+        },
+      ]
+    )
+    .sort({ "_id": 1})
+    .toArray();
+    return avgs;
+  }
+  return [];
+}

@@ -12,10 +12,15 @@ const schema = buildSchema(`
     mbps: Float,
     time: String,
   }
+  type Average {
+    mbps: Float,
+    _id: Int,
+  }
   type Query {
     hello: String,
     getToday: [Result],
     getDate(date: String): [Result],
+    avgAll: [Average],
   }
 `);
 
@@ -30,6 +35,10 @@ const root = {
   },
   getDate: async ({ date }) => {
     const results = await api.date(date);
+    return results;
+  },
+  avgAll: async () => {
+    const results = await api.avgAll();
     return results;
   }
 };

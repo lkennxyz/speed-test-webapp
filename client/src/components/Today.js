@@ -27,6 +27,16 @@ class Today extends Component {
     );
   }
   async getData() {
+    const query = `query GetTodayAndAverage {
+      getToday{
+        mbps
+        time
+      }
+      avgAll{
+        mbps
+        _id
+      }
+    }`;
     fetch('/graphql', {
       method: 'POST',
       headers: {
@@ -34,20 +44,26 @@ class Today extends Component {
         'Accept': 'application/json',
       },
       body: JSON.stringify({
-        query: "{ getToday { mbps time } }"
+        query
       }),
     })
       .then(r => r.json())
-      .then(data => this.createGraphData(data.data.getToday))
+      .then(data => this.createGraphData(data.data))
       .then(data => this.setState({ data: data}))
       .catch (err => console.error(err));
   }
   async createGraphData(results) {
-    const data = await results.map(el => {
+    const data = await results.getToday.map(el => {
       const date = new Date(Number(el.time));
       return { Time: `${date.getHours()}:00`, Mbps: el.mbps };
     });
-    return data;
+    const avgdata = await results.avgAll.map(el => ({ Time: `${el._id}:00`, MbpsAvg: el.mbps }));
+    avgdata.forEach((el, i) => {
+      if (data[i]) {
+        Object.assign(el, data[i]);
+      }
+    });
+    return avgdata;
   }
 }
 

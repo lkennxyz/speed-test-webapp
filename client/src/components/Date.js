@@ -19,7 +19,6 @@ class Side extends Component {
     const graph = (this.state.data) ? <LineGraph data={this.state.data}/> : 'No Data';
     return (
       <div className='Date'>
-        <Helmet><title>Speeds for {this.state.selectedDate}</title></Helmet>
         <Head>
           <DatePicker
             selected={this.state.selectedDate}
@@ -35,8 +34,17 @@ class Side extends Component {
     );
   }
   async getData() {
-    const selected = this.state.selectedDate.toString();
-    console.log(selected);
+    const date = this.state.selectedDate;
+    const query = `query GetDateAndAverage($date: String) {
+      getDate(date:$date){
+        mbps
+        time
+      }
+      avgAll{
+        mbps
+        _id
+      }
+    }`;
     fetch('/graphql', {
       method: 'POST',
       headers: {
@@ -44,25 +52,30 @@ class Side extends Component {
         'Accept': 'application/json',
       },
       body: JSON.stringify({
-        query: `{getDate(date:"${selected}"){mbps time}}`
+        query,
+        variables: { date }
       }),
     })
       .then(r => r.json())
-      .then(data => this.createGraphData(data.data.getDate))
-      .then(data => this.setState({ data: data}))
+      .then(data => this.createGraphData(data.data))
+      .then(data => this.setState({ data: data }))
       .catch (err => console.error(err));
   }
   async createGraphData(results) {
-    const data = await results.map(el => {
+    const data = await results.getDate.map(el => {
       const date = new Date(Number(el.time));
       return { Time: `${date.getHours()}:00`, Mbps: el.mbps };
     });
-    return data;
+    const avgdata = await results.avgAll.map(el => ({ Time: `${el._id}:00`, MbpsAvg: el.mbps }));
+    avgdata.forEach((el, i) => {
+      if (data[i]) {
+        Object.assign(el, data[i]);
+      }
+    });
+    return avgdata;
   }
   async handleChange(selection) {
-    console.log(selection);
     await this.setState({ selectedDate: selection });
-    console.log(this.state.selectedDate);
     this.getData();
   }
 
