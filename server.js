@@ -51,7 +51,7 @@ const root = {
     graphiql: true,
   }));
   app.use('/', express.static(path.join(__dirname, 'client/build')));
-  app.listen(4000, async () => {
+  app.listen(process.env.PORT || 4000, async () => {
     console.log('Running a GraphQL API server at localhost:4000/graphql');
     await db.connect();
   });
