@@ -5,6 +5,10 @@
   "main": "server.js",
   "author": "Liam Kennedy <liam@lkenn.xyz>",
   "license": "MIT",
+  "scripts": {
+	  "start": "node server.js",
+	  "build": "cd client && npm run build"
+  },
   "dependencies": {
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
