@@ -9,6 +9,7 @@
 	  "start": "node server.js",
 	  "build": "cd client && npm run build"
   },
+  "heroku-run-build-script": true,
   "dependencies": {
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
