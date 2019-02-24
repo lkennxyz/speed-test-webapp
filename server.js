@@ -48,7 +48,7 @@ const root = {
   app.use('/graphql', graphqlHTTP({
     schema: schema,
     rootValue: root,
-    graphiql: true,
+    graphiql: (process.env.NODE_ENV === 'production') ? false : true,
   }));
   app.use('/', express.static(path.join(__dirname, 'client/build')));
   app.listen(process.env.PORT || 4000, async () => {
