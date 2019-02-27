@@ -6,14 +6,13 @@ import LineGraph from './LineGraph';
 import Head from './Head';
 import Content from './Content';
 
-class Side extends Component {
+class SelectedDate extends Component {
   constructor() {
     super();
     this.state = {
-      selectedDate: null,
+      selected: null,
       data: null,
     }
-    this.handleChange = this.handleChange.bind(this);
   }
   render() {
     const graph = (this.state.data) ? <LineGraph data={this.state.data}/> : 'No Data';
@@ -21,8 +20,8 @@ class Side extends Component {
       <div className='Date'>
         <Head>
           <DatePicker
-            selected={this.state.selectedDate}
-            onChange={this.handleChange}
+            selected={this.state.selected}
+            onChange={this.handleChange.bind(this)}
             popperPlacement='top-end'
             dateFormat='dd/MM/yyyy'
           />
@@ -44,6 +43,14 @@ class Side extends Component {
         mbps
         _id
       }
+      highs{
+        mbps
+        _id
+      }
+      lows{
+        mbps
+        _id
+      }
     }`;
     fetch('/graphql', {
       method: 'POST',
@@ -62,23 +69,23 @@ class Side extends Component {
       .catch (err => console.error(err));
   }
   async createGraphData(results) {
-    const data = await results.getDate.map(el => {
-      const date = new Date(Number(el.time));
-      return { Time: `${date.getHours()}:00`, Mbps: el.mbps };
-    });
-    const avgdata = await results.avgAll.map(el => ({ Time: `${el._id}:00`, MbpsAvg: el.mbps }));
-    avgdata.forEach((el, i) => {
-      if (data[i]) {
-        Object.assign(el, data[i]);
-      }
-    });
-    return avgdata;
+    const data = results.getDate;
+    const avgdata = results.avgAll;
+    const highs = results.highs;
+    const lows = results.lows;
+    const ret = await avgdata.map((el, i) => ({
+      Mbps: (data[i]) ? data[i].mbps : null,
+      AvgMbps: el.mbps,
+      HighMbps: highs[i].mbps,
+      LowMbps: lows[i].mbps,
+      Time: `${el._id}:00`,
+    }));
+    return ret;
   }
   async handleChange(selection) {
-    await this.setState({ selectedDate: selection });
+    await this.setState({ selected: selection });
     this.getData();
   }
-
 }
 
-export default Side;
+export default SelectedDate;

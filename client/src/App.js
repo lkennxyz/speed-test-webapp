@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 // import logo from './logo.svg';
 import Side from './components/Side';
 import Today from './components/Today';
-import Date from './components/Date';
+import SelectedDate from './components/Date';
 import './App.css';
 
 const AppContainer = styled.div`
@@ -29,7 +29,7 @@ class App extends Component {
             <Side />
             <Body>
               <Route path="/today" component={Today} />
-              <Route path="/date" component={Date} />
+              <Route path="/date" component={SelectedDate} />
             </Body>
           </AppContainer>
         </header>

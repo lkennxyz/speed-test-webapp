@@ -21,6 +21,8 @@ const schema = buildSchema(`
     getToday: [Result],
     getDate(date: String): [Result],
     avgAll: [Average],
+    highs: [Average],
+    lows: [Average],
   }
 `);
 
@@ -39,6 +41,14 @@ const root = {
   },
   avgAll: async () => {
     const results = await api.avgAll();
+    return results;
+  },
+  highs: async () => {
+    const results = await api.hourlyMax();
+    return results;
+  },
+  lows: async () => {
+    const results = await api.hourlyMin();
     return results;
   }
 };

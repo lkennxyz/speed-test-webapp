@@ -41,3 +41,43 @@ exports.avgAll = async function () {
   }
   return [];
 }
+
+exports.hourlyMax = async function () {
+  const collection = db.get();
+    if(collection) {
+      const max = await collection.aggregate(
+        [
+          { $group:
+            {
+              _id:"$hour",
+              mbps: { $max: "$mbps" },
+            }
+          },
+        ]
+      )
+        .sort({ "_id": 1 })
+        .toArray();
+        return max;
+    }
+  return [];
+}
+
+exports.hourlyMin = async function () {
+  const collection = db.get();
+    if(collection) {
+      const min = await collection.aggregate(
+        [
+          { $group:
+            {
+              _id:"$hour",
+              mbps: { $min: "$mbps" },
+            }
+          },
+        ]
+      )
+        .sort({ "_id": 1 })
+        .toArray();
+        return min;
+    }
+  return [];
+}
