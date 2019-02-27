@@ -18,6 +18,7 @@ class SelectedDate extends Component {
     const graph = (this.state.data) ? <LineGraph data={this.state.data}/> : 'No Data';
     return (
       <div className='Date'>
+        <Helmet><title>{`Selected Date | ${ this.state.selected }`}</title></Helmet>
         <Head>
           <DatePicker
             selected={this.state.selected}
@@ -33,7 +34,7 @@ class SelectedDate extends Component {
     );
   }
   async getData() {
-    const date = this.state.selectedDate;
+    const date = this.state.selected;
     const query = `query GetDateAndAverage($date: String) {
       getDate(date:$date){
         mbps

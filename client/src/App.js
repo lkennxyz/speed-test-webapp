@@ -25,7 +25,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <AppContainer>
-            <Helmet><title>Speed Test</title></Helmet>
+            <Helmet><title>{ 'Speed Test' }</title></Helmet>
             <Side />
             <Body>
               <Route path="/today" component={Today} />

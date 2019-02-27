@@ -18,7 +18,7 @@ class Today extends Component {
     const graph = (this.state.data) ? <LineGraph data={this.state.data}/> : 'No Data';
     return (
       <div className="Today">
-        <Helmet><title>Today's Speeds</title></Helmet>
+        <Helmet><title>{ 'Today' }</title></Helmet>
         <Head />
         <Content>
           {graph}
