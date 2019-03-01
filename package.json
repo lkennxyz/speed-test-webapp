@@ -6,15 +6,17 @@
   "author": "Liam Kennedy <liam@lkenn.xyz>",
   "license": "MIT",
   "scripts": {
-	  "start": "node server.js",
-	  "build": "cd client && yarn && yarn build"
+    "start": "node server.js",
+    "build": "cd client && yarn && yarn build"
   },
   "heroku-run-build-script": true,
   "dependencies": {
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.1.1",
-    "mongodb": "^3.1.13"
+    "mongodb": "^3.1.13",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1"
   },
   "devDependencies": {
     "dotenv": "^6.2.0"

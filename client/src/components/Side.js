@@ -10,8 +10,9 @@ const Navigation = styled.div`
   color: #8d97ad;
   font-size: 1em;
   letter-spacing: 2px;
-  width: 20%;
+  width: 20vw;
   line-height: 22px;
+
 `;
 const theme = {
   selectionColor: '#FFF',
@@ -19,30 +20,36 @@ const theme = {
 };
 const Text = styled.div`
   padding-left: 8px;
-  color: #FFF !important;
   text-decoration: none !important;
 `;
 
 class Side extends Component {
   render() {
     return (
-        <Navigation>
-          <SideNav
-            defaultSelectedPath="1"
-            theme={theme}
-          >
-            <Link to='/today'>
-              <Nav id="1">
-                <Text>Today</Text>
-              </Nav>
-            </Link>
-            <Link to='/date'>
-              <Nav id="2">
-                <Text>Selected Date</Text>
-              </Nav>
-            </Link>
-          </SideNav>
-        </Navigation>
+        <div>
+          <div className="head">
+            <h3>
+              <Text>->/home/kenn/project-overkill</Text>
+            </h3>
+          </div>
+          <Navigation>
+            <SideNav
+              defaultSelectedPath="1"
+              theme={theme}
+            >
+              <Link to='/today'>
+                <Nav id="1">
+                  <Text>Today</Text>
+                </Nav>
+              </Link>
+              <Link to='/date'>
+                <Nav id="2">
+                  <Text>Selected Date</Text>
+                </Nav>
+              </Link>
+            </SideNav>
+          </Navigation>
+        </div>
     );
   }
 }
