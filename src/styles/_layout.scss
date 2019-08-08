@@ -1,0 +1,54 @@
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  height: 100%;
+}
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
+.App {
+  height: 100vh;
+  display: grid;
+  @media only screen and (max-width: 1200px) {
+    grid-template-columns: 5% 90% 5%;
+  }
+  @media only screen and (min-width: 1200px) {
+    grid-template-columns: 10% 80% 10%;
+  }
+  grid-template-rows: 0.1fr auto;
+  grid-template-areas: "header header header"
+    ". main .";
+}
+.Header {
+  background-color: #333;
+  color: #eee;
+  grid-area: header;
+  display: grid;
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: 20% 60% 20%;
+    grid-template-areas: "logo title date";
+  }
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    grid-template-areas: "logo date"
+      "title title";
+  }
+  .Title {
+    grid-area: title;
+    margin: auto;
+  }
+  .Datepicker {
+    grid-area: date;
+    margin: auto;
+    margin-right: 0.5em;
+    width: 100%;
+  }
+}
+main {
+  grid-area: main;
+}
