@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Layout from './components/Layout';
 import LineGraph from './components/LineGraph';
 import { getData, getAverages, createGraphData } from './components/Data';
-//import './App.css';
 import './styles/App.scss';
 
 const App = () => {

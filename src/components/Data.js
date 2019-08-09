@@ -56,7 +56,6 @@ const getAverages = async () => {
   }
 };
 const createGraphData = async ({ data, avg, hi, lo }) => {
-  console.log(data);
   const ret = await avg.map((el, i) => ({
     Mbps: (data[i]) ? data[i].mbps : null,
     AvgMbps: el.mbps,
