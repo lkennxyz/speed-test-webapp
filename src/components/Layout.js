@@ -28,7 +28,7 @@ const Layout = ({ date, setDate, children }) => {
           />
         </div>
       </header>
-      <main>{ children }</main>
+      <div className="Content">{ children }</div>
     </div>
   );
 };
